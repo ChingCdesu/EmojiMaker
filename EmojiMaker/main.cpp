@@ -1,14 +1,14 @@
-#include <Windows.h>	//gdiplus.hÒÀÀµ
+#include <Windows.h>	//gdiplus.hä¾èµ–
 #include <string>
-#include "gdiplus.h"		//Í¼Æ¬´¦ÀíÍ·ÎÄ¼ş
+#include "gdiplus.h"		//å›¾ç‰‡å¤„ç†å¤´æ–‡ä»¶
 
-#pragma comment(lib,"Gdiplus.lib")	//Í¼ĞÎ´¦Àí¿âÎÄ¼ş
+#pragma comment(lib,"Gdiplus.lib")	//å›¾å½¢å¤„ç†åº“æ–‡ä»¶
 
 using namespace std;
-using namespace Gdiplus;	//ÃüÃû¿Õ¼ä
+using namespace Gdiplus;	//å‘½åç©ºé—´
 
-/*½«µ¥×Ö½Ú×Ö·û´®×ª»»³É¿í×Ö·û*/
-/*szStrÔ­µ¥×Ö½Ú×Ö·û*/
+/*å°†å•å­—èŠ‚å­—ç¬¦ä¸²è½¬æ¢æˆå®½å­—ç¬¦*/
+/*szStråŸå•å­—èŠ‚å­—ç¬¦*/
 wchar_t* AnsiToUnicode(const char* szStr)
 {
 	int nLen = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, szStr, -1, NULL, 0);
@@ -20,8 +20,8 @@ wchar_t* AnsiToUnicode(const char* szStr)
 	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, szStr, -1, pResult, nLen);
 	return pResult;
 }
-/*»ñÈ¡Í¼Æ¬±àÂëÆ÷*/
-/*formatÍ¼Æ¬¸ñÊ½  pClsidÍ¼Æ¬±àÂëÆ÷ÈİÆ÷*/
+/*è·å–å›¾ç‰‡ç¼–ç å™¨*/
+/*formatå›¾ç‰‡æ ¼å¼  pClsidå›¾ç‰‡ç¼–ç å™¨å®¹å™¨*/
 int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
 {
 	UINT  num = 0;          // number of image encoders
@@ -53,16 +53,16 @@ int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
 	return -1;  // Failure
 }
 
-/*cmdµ÷ÓÃ*/
-/*·½·¨ ...\EmojiMaker.exe <ÈËÃû> <Í¼Æ¬ID> <×Ö>*/
+/*cmdè°ƒç”¨*/
+/*æ–¹æ³• ...\EmojiMaker.exe <äººå> <å›¾ç‰‡ID> <å­—>*/
 int main(int agrc, char* agrv[])
 {
 	if (agrc != 4) return -1;
-	//³õÊ¼»¯Gdiplus
+	//åˆå§‹åŒ–Gdiplus
 	Gdiplus::GdiplusStartupInput m_GdiplusStrartupInput;
 	ULONG_PTR m_GdiplusToken;
 	Gdiplus::GdiplusStartup(&m_GdiplusToken, &m_GdiplusStrartupInput, NULL);
-	//½«²ÎÊı´«Èë±äÁ¿
+	//å°†å‚æ•°ä¼ å…¥å˜é‡
 	const wstring charcter = AnsiToUnicode(agrv[1]);
 	const wstring num = AnsiToUnicode(agrv[2]);
 	const wstring str = AnsiToUnicode(agrv[3]);
@@ -74,7 +74,7 @@ int main(int agrc, char* agrv[])
 	//wstring str = L"txt";
 
 
-	//Í³¼Æºº×ÖºÍÓ¢ÎÄ×Ö·ûµÄ¸öÊı
+	//ç»Ÿè®¡æ±‰å­—å’Œè‹±æ–‡å­—ç¬¦çš„ä¸ªæ•°
 	UINT UnicodeNum = 0;
 	UINT AscIINum = 0;
 	for (size_t tmp = 0; tmp < str.length(); tmp++)
@@ -82,56 +82,56 @@ int main(int agrc, char* agrv[])
 		if (str[tmp] >= L' ' && str[tmp] <= L'~') AscIINum++;
 		else UnicodeNum++;
 	}
-	//Èç¹û×Ö·û³¬¹ı×î´óÊıÁ¿ÔòÍË³ö³ÌĞò
+	//å¦‚æœå­—ç¬¦è¶…è¿‡æœ€å¤§æ•°é‡åˆ™é€€å‡ºç¨‹åº
 	if (UnicodeNum * 2 + AscIINum > 30) return -2;
-	//Ô­Í¼jpgµÄÂ·¾¶
-	wstring path = L"A:\\_ChingC\\¿áQ Pro\\data\\emojis\\" + charcter + L"\\" + num + L".jpg";
-	//´ò¿ªÍ¼Æ¬ÎªBitmap£¨Î»Í¼£©
+	//åŸå›¾jpgçš„è·¯å¾„
+	wstring path = L"A:\\_ChingC\\é…·Q Pro\\data\\emojis\\" + charcter + L"\\" + num + L".jpg";
+	//æ‰“å¼€å›¾ç‰‡ä¸ºBitmapï¼ˆä½å›¾ï¼‰
 	Gdiplus::Bitmap *pic = new Gdiplus::Bitmap(path.c_str());
-	//»ñÈ¡³¤¶ÈºÍ¿í¶È
+	//è·å–é•¿åº¦å’Œå®½åº¦
 	UINT width = pic->GetWidth();
 	UINT height = pic->GetHeight();
-	//Ã¿¸ö×Ö·ûµÄ´óĞ¡
+	//æ¯ä¸ªå­—ç¬¦çš„å¤§å°
 	double CharacterSize;
-	if (str.length() == 0)//Èç¹ûÃ»ÓĞ×Ö·ûÔò·µ»ØÔ­Í¼
+	if (str.length() == 0)//å¦‚æœæ²¡æœ‰å­—ç¬¦åˆ™è¿”å›åŸå›¾
 		CharacterSize = 0;
 	else if (UnicodeNum * 2 + AscIINum <= 10)
 		CharacterSize = 0.2 * width;
 	else
 		CharacterSize = width / str.length();
-	//ĞÂ½¨Î»Í¼emoji£¨¿í¶È£¬Ô­Í¼¸ß¶È+×Ö·û¸ß¶È£©ºÍ»­²¼graphic£¨»ùÓÚÎ»Í¼emoji´óĞ¡£©
+	//æ–°å»ºä½å›¾emojiï¼ˆå®½åº¦ï¼ŒåŸå›¾é«˜åº¦+å­—ç¬¦é«˜åº¦ï¼‰å’Œç”»å¸ƒgraphicï¼ˆåŸºäºä½å›¾emojiå¤§å°ï¼‰
 	Gdiplus::Bitmap *emoji = new Gdiplus::Bitmap(width, height + CharacterSize);
 	Gdiplus::Graphics *graphic = new Gdiplus::Graphics(emoji);
-	//¸ø»­²¼Í¿ÉÏ°×É«±³¾°
+	//ç»™ç”»å¸ƒæ¶‚ä¸Šç™½è‰²èƒŒæ™¯
 	graphic->Clear(Gdiplus::Color::White);
-	//ÉèÖÃ»­²¼¿¹¾â³İĞ§¹û
+	//è®¾ç½®ç”»å¸ƒæŠ—é”¯é½¿æ•ˆæœ
 	graphic->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
-	//½«Ô­Í¼»­µ½»­²¼ÉÏ
+	//å°†åŸå›¾ç”»åˆ°ç”»å¸ƒä¸Š
 	graphic->DrawImage(pic, 0, 0, height, width);
-	//ÉèÖÃ×ÖÌå¸ñÊ½Îª¾ÓÖĞ
+	//è®¾ç½®å­—ä½“æ ¼å¼ä¸ºå±…ä¸­
 	StringFormat format;
 	format.SetAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
-	//ÉèÖÃ×ÖÌå×é
-	Gdiplus::FontFamily fontFamily(L"ºÚÌå");
-	//ÉèÖÃ×ÖÌå
-	//FontStyleRegular		·Ç¼Ó´ÖÇãĞ±×ÖÌå
-	//UnitPoint					ÏñËØ¸ñÊ½äÖÈ¾
+	//è®¾ç½®å­—ä½“ç»„
+	Gdiplus::FontFamily fontFamily(L"é»‘ä½“");
+	//è®¾ç½®å­—ä½“
+	//FontStyleRegular		éåŠ ç²—å€¾æ–œå­—ä½“
+	//UnitPoint			åƒç´ æ ¼å¼æ¸²æŸ“
 	Gdiplus::Font font(&fontFamily, 0.65 * CharacterSize, Gdiplus::FontStyleRegular,Gdiplus::Unit::UnitPoint);
-	//ÉèÖÃºÚÉ«±ÊË¢
+	//è®¾ç½®é»‘è‰²ç¬”åˆ·
 	Gdiplus::SolidBrush BlackBrush(Gdiplus::Color::Color(255, 0, 0, 0));
-	//×Ö·ûÎ»ÖÃ
+	//å­—ç¬¦ä½ç½®
 	Gdiplus::PointF CharacterStartPoint(0.5 * width, height);
-	//»­×Ö·ûµ½»­²¼ÉÏ
-	//str.c_str()					×Ö·û´®
-	//str.length()				×Ö·û´®³¤¶È
+	//ç”»å­—ç¬¦åˆ°ç”»å¸ƒä¸Š
+	//str.c_str()			å­—ç¬¦ä¸²
+	//str.length()			å­—ç¬¦ä¸²é•¿åº¦
 	graphic->DrawString(str.c_str(), str.length(), &font, CharacterStartPoint, &format, &BlackBrush);
 	
 	CLSID pngClsid;
-	GetEncoderClsid(L"image/png", &pngClsid);//ÉèÖÃÍ¼Æ¬ÒÔpng¸ñÊ½äÖÈ¾
-	//±£´æµ½Ö¸¶¨Â·¾¶
-	//pngClsid					äÖÈ¾Æ÷
-	emoji->Save(L"A:\\_ChingC\\¿áQ Pro\\data\\image\\emoji.png", &pngClsid, NULL);
-	//¹Ø±ÕGdiplus£¨»á³öÏÖÄÚ´æ·ÃÎÊ´íÎó£¬ÒÑÍ£ÓÃ£©
+	GetEncoderClsid(L"image/png", &pngClsid);//è®¾ç½®å›¾ç‰‡ä»¥pngæ ¼å¼æ¸²æŸ“
+	//ä¿å­˜åˆ°æŒ‡å®šè·¯å¾„
+	//pngClsid			æ¸²æŸ“å™¨
+	emoji->Save(L"A:\\_ChingC\\é…·Q Pro\\data\\image\\emoji.png", &pngClsid, NULL);
+	//å…³é—­Gdiplusï¼ˆä¼šå‡ºç°å†…å­˜è®¿é—®é”™è¯¯ï¼Œå·²åœç”¨ï¼‰
 	//GdiplusShutdown(m_GdiplusToken);
 	return 0;
 }
