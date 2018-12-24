@@ -20,5 +20,5 @@ Compile Passed Environment
 Usage(On Windows)
 
 1) Open Command in the dictionary where the *.exe file exists
-2) Input "*.exe <Character Name> <PicID> <Words>
+2) Input "*.exe (Character Name) (PicID) (Words)"
 3) Find the output picture(Always be .png format)
