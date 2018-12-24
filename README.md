@@ -15,7 +15,7 @@ How to compile by Other Compiler
 
 Compile Passed Environment
 
-1) Visual Studio 2017 (Windows 64-bits, Debug(Release) x86)
+1) Visual Studio 2017 (Windows 64-bits, Debug&Release x86)
 
 Usage(On Windows)
 
