@@ -107,7 +107,7 @@ int main(int agrc, char* agrv[])
 	//设置画布抗锯齿效果
 	graphic->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
 	//将原图画到画布上
-	graphic->DrawImage(pic, 0, 0, height, width);
+	graphic->DrawImage(pic, 0, 0, width, height);
 	//设置字体格式为居中
 	StringFormat format;
 	format.SetAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
