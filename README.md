@@ -2,16 +2,14 @@ How to compile by Visual Studio
 
 1) Download the project
 2) Open .sln file
-
-3)***Change picture dictionary path and output path***
+3) Change picture dictionary path and output path
 4) compile
 
 How to compile by Other Compiler
 1) Download main.cpp
 2) Create a source file
 3) Copy into the source file
-
-4)***Change picture dictionary path and output path***
+4) Change picture dictionary path and output path
 5) Compile
 
 
