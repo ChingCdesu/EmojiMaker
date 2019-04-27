@@ -19,7 +19,7 @@ Compile By Your Environment
 
 Usage(On Windows Platform)
 
-0) Change the output path (on line in source file)
+0) Change the output path (on 133 line in source file)
 1) Open Command in the dictionary where the *.exe file exists
 2) Input "*.exe (Character Name) (PicID) (Words)"
 3) Find the output picture(Always be .png format)
