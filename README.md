@@ -17,8 +17,9 @@ Compile By Your Environment
 
 1) Visual Studio 2017 (Windows 64-bits, Debug&Release x86)
 
-Usage(On Windows)
+Usage(On Windows Platform)
 
+0) Change the output path (on line in source file)
 1) Open Command in the dictionary where the *.exe file exists
 2) Input "*.exe (Character Name) (PicID) (Words)"
 3) Find the output picture(Always be .png format)
