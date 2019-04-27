@@ -13,7 +13,7 @@ How to compile by Other Compiler
 5) Compile
 
 
-Compile Passed Environment
+Compile By Your Environment
 
 1) Visual Studio 2017 (Windows 64-bits, Debug&Release x86)
 
